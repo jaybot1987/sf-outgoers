@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF's Best Events This Week | April 16–22, 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-start: #0a0a1a;
+            --bg-end: #1a1a3e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-dim: #b0b0d0;
+            --text-description: #9e9eb0;
+            --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-inter);
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #a5a5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+
+        header p.dates {
+            font-weight: 600;
+            color: #7c4dff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .day-section {
+            margin-bottom: 50px;
+        }
+
+        .day-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #a5a5ff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(165, 165, 255, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(124, 77, 255, 0.2);
+        }
+
+        .event-banner {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(10, 10, 26, 0.8), transparent);
+        }
+
+        .event-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .event-details {
+            margin-bottom: 16px;
+        }
+
+        .event-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .event-meta {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .event-meta span {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .event-description {
+            font-size: 14px;
+            color: var(--text-description);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .ticket-btn {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #0a0a1a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            margin-top: auto;
+        }
+
+        .ticket-btn:hover {
+            filter: brightness(0.9);
+            transform: scale(1.02);
+        }
+
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 15px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer .phone-cta {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Fallback for broken images */
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a3e, #7c4dff);
+            display: none;
+        }
+        
+        img[style*="display: none"] + .img-placeholder {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <p class="subtitle">Hey Outgoers 👋</p>
+        <h1>SF's Best Events This Week</h1>
+        <p class="dates">April 16–22, 2026</p>
+    </header>
+
+    <!-- THURSDAY -->
+    <section class="day-section">
+        <h2 class="day-header">Thursday April 16</h2>
+        <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card" style="border-left: 5px solid #ff6b35;">
+                <div class="event-banner">
+                    <img src="https://static.tixr.com/static/images/external/img/be4791a1-cd39-4b8c-8c03-3796ca259cb6.png" alt="Desert Hearts DJs" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Desert Hearts DJs</h3>
+                        <div class="event-meta">
+                            <span>📍 Mint Plaza</span>
+                            <span>🕒 5:00 PM</span>
+                        </div>
+                        <p class="event-description">A free Third Thursday event at the Historic SF Mint featuring a Desert Hearts takeover with DJs Lee Reynolds, Marbs, and Mikey Lion.</p>
+                    </div>
+                    <a href="https://www.tixr.com/e/184594" class="ticket-btn" style="background: #ff6b35; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card" style="border-left: 5px solid #e91e63;">
+                <div class="event-banner">
+                    <img src="https://sanfranciscoartfair.com/wp-content/uploads/2025/04/sf-art-fair-4-17-25-drew-bird-210-1.jpg" alt="SF Art Fair" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>SF Art Fair</h3>
+                        <div class="event-meta">
+                            <span>📍 Fort Mason</span>
+                            <span>🕒 11:00 AM (Thu–Sun)</span>
+                        </div>
+                        <p class="event-description">The evolution of Art Market San Francisco, this fair showcases the thriving Bay Area arts ecosystem at the Fort Mason Festival Pavilion.</p>
+                    </div>
+                    <a href="https://sanfranciscoartfair.com/visit/" class="ticket-btn" style="background: #e91e63; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card" style="border-left: 5px solid #9c27b0;">
+                <div class="event-banner">
+                    <img src="https://www.famsf.org/storage/images/7bd4765f-f9ee-4a4c-b09b-14f61c7f4f1c/late-night-de-young.jpg?crop=4752,2674,x0,y332&format=jpg&quality=80" alt="de Young Museum Late Night Gala" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>de Young Museum Late Night Gala</h3>
+                        <div class="event-meta">
+                            <span>📍 de Young Museum</span>
+                            <span>🕒 9:00 PM</span>
+                        </div>
+                        <p class="event-description">An immersive museum after-party featuring elective DJ sets, a headlining performance by UMI, open bars, and after-hours gallery access.</p>
+                    </div>
+                    <a href="https://www.famsf.org/events/late-night-2026" class="ticket-btn" style="background: #9c27b0; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FRIDAY -->
+    <section class="day-section">
+        <h2 class="day-header">Friday April 17</h2>
+        <div class="events-grid">
+            <!-- Event 4 -->
+            <div class="event-card" style="border-left: 5px solid #ff9800;">
+                <div class="event-banner">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5ec321c2af33de48734cc929/1618497259178-6XJGK9GR6YAVBQL5L519/20140301_Trade-151_012-2.jpg" alt="Artists Takeover at Hotel Del Sol" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Artists Takeover at Hotel Del Sol</h3>
+                        <div class="event-meta">
+                            <span>📍 Hotel Del Sol</span>
+                            <span>🕒 All Day (Fri–Sun)</span>
+                        </div>
+                        <p class="event-description">Over 80 independent artists transform every room of the Hotel Del Sol into a personal gallery for three days. Visitors can wander from room to room, meet the makers, and collect contemporary work directly from the source.</p>
+                    </div>
+                    <a href="https://www.startup-art.com/san-francisco" class="ticket-btn" style="background: #ff9800; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="event-card" style="border-left: 5px solid #4caf50;">
+                <div class="event-banner">
+                    <img src="http://fortmason.org/wp-content/uploads/2026/01/FM_Night_Market_806x585.jpg" alt="Off The Grid Night Market" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Off The Grid Night Market</h3>
+                        <div class="event-meta">
+                            <span>📍 Fort Mason</span>
+                            <span>🕒 5:00 PM</span>
+                        </div>
+                        <p class="event-description">A free monthly market that transforms the historic FMCAC waterfront campus into a destination for shopping, dining, and live music with over 50 craft vendors.</p>
+                    </div>
+                    <a href="https://fortmason.org/series/fort-mason-night-market-2026/" class="ticket-btn" style="background: #4caf50; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="event-card" style="border-left: 5px solid #00bcd4;">
+                <div class="event-banner">
+                    <img src="https://images.axs.com/2025/11/kaskade_04-17-26_2_673e57fbed453.jpg" alt="Kaskade" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Kaskade</h3>
+                        <div class="event-meta">
+                            <span>📍 Pier 48</span>
+                            <span>🕒 8:00 PM</span>
+                        </div>
+                        <p class="event-description">Goldenvoice presents Kaskade for an 'Open To Close' set at Pier 48's Shed A — a massive waterfront warehouse setting. 21+.</p>
+                    </div>
+                    <a href="https://www.axs.com/events/1355587/kaskade-tickets" class="ticket-btn" style="background: #00bcd4; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SATURDAY -->
+    <section class="day-section">
+        <h2 class="day-header">Saturday April 18</h2>
+        <div class="events-grid">
+            <!-- Event 7 -->
+            <div class="event-card" style="border-left: 5px solid #f48fb1;">
+                <div class="event-banner">
+                    <img src="https://sfcherryblossom.org/wp-content/uploads/2024/01/home_David-Yu_cherryblossoms-in-PP.jpeg" alt="Cherry Blossom Festival & Parade" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Cherry Blossom Festival & Parade</h3>
+                        <div class="event-meta">
+                            <span>📍 Japantown</span>
+                            <span>🕒 11:00 AM (Sat–Sun)</span>
+                        </div>
+                        <p class="event-description">The 59th Annual Northern California Cherry Blossom Festival celebrates Japanese culture and heritage in Japantown with a Grand Parade and cultural programs.</p>
+                    </div>
+                    <a href="https://sfcherryblossom.org/" class="ticket-btn" style="background: #f48fb1; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 8 -->
+            <div class="event-card" style="border-left: 5px solid #ff5722;">
+                <div class="event-banner">
+                    <img src="https://images.humanitix.com/i/7ed22e5e-dee8-4d76-9993-39a986354c1e.png@seo-500.jpg" alt="Pole Dance Karaoke Party" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Pole Dance Karaoke Party</h3>
+                        <div class="event-meta">
+                            <span>📍 Slash Gallery</span>
+                            <span>🕒 8:30 PM</span>
+                        </div>
+                        <p class="event-description">A late-night fundraiser at Slash gallery featuring pole performances and karaoke to support the Bay Area art community.</p>
+                    </div>
+                    <a href="https://events.humanitix.com/you-have-to-be-there" class="ticket-btn" style="background: #ff5722; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 9 -->
+            <div class="event-card" style="border-left: 5px solid #7c4dff;">
+                <div class="event-banner">
+                    <img src="https://static.tixr.com/static/images/external/img/8caa2717-1356-4c49-8143-911c427cb53d.jpg" alt="Snakehips" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Snakehips</h3>
+                        <div class="event-meta">
+                            <span>📍 Public Works</span>
+                            <span>🕒 9:00 PM</span>
+                        </div>
+                        <p class="event-description">Snakehips performs live at Public Works in San Francisco.</p>
+                    </div>
+                    <a href="https://www.tixr.com/groups/publicsf/events/snakehips-presented-by-public-works-173506" class="ticket-btn" style="background: #7c4dff; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUNDAY -->
+    <section class="day-section">
+        <h2 class="day-header">Sunday April 19</h2>
+        <div class="events-grid">
+            <!-- Event 10 -->
+            <div class="event-card" style="border-left: 5px solid #ffc107;">
+                <div class="event-banner">
+                    <img src="https://p-m.ra.co/events/flyer/2358746-1744111306616.jpg" alt="Sunset Sound System Picnic" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Sunset Sound System Picnic</h3>
+                        <div class="event-meta">
+                            <span>📍 Yerba Buena Gardens</span>
+                            <span>🕒 11:00 AM</span>
+                        </div>
+                        <p class="event-description">Bay Area house music stalwarts Sunset Sound System return with a free all-dayer in the heart of downtown San Francisco at Yerba Buena Gardens.</p>
+                    </div>
+                    <a href="https://ra.co/events/2358746" class="ticket-btn" style="background: #ffc107; color: #0a0a1a;">Get Tickets →</a>
+                </div>
+            </div>
+
+            <!-- Event 11 -->
+            <div class="event-card" style="border-left: 5px solid #66bb6a;">
+                <div class="event-banner">
+                    <img src="https://p-m.ra.co/events/flyer/2406102-1744383411475.jpg" alt="Jade To Dusk Renegade" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Jade To Dusk Renegade</h3>
+                        <div class="event-meta">
+                            <span>📍 Hidden Forest, SF</span>
+                            <span>🕒 1:00 PM</span>
+                        </div>
+                        <p class="event-description">An open air daytime renegade set within a hidden forest in San Francisco, featuring hard groove, hard techno, and bounce.</p>
+                    </div>
+                    <a href="https://ra.co/events/2406102" class="ticket-btn" style="background: #66bb6a; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEDNESDAY -->
+    <section class="day-section">
+        <h2 class="day-header">Wednesday April 22</h2>
+        <div class="events-grid">
+            <!-- Event 12 -->
+            <div class="event-card" style="border-left: 5px solid #42a5f5;">
+                <div class="event-banner">
+                    <img src="https://images.partiful.com/events/e1bb4599-756f-474c-ba9c-f9159079fcd8/XVdPJ0gG7uNMlVlPokjJf.jpeg" alt="Poolside Poets at St. Joe's" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="img-placeholder"></div>
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="event-body">
+                    <div class="event-details">
+                        <h3>Poolside Poets at St. Joe's</h3>
+                        <div class="event-meta">
+                            <span>📍 Saint Joseph's Art Society</span>
+                            <span>🕒 6:30 PM</span>
+                        </div>
+                        <p class="event-description">A dreamy night of poetry, live music, dance, and fashion at the breathtaking Saint Joseph's Art Society, celebrating Earth Day with an elemental dress code.</p>
+                    </div>
+                    <a href="https://partiful.com/e/AxKrJxX8LWmdGFY0Iw2N" class="ticket-btn" style="background: #42a5f5; color: #fff;">Get Tickets →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<footer>
+    <p>Restore your faith in humanity. Outgo to an art fair and see the breadth of human experience.</p>
+    <p class="phone-cta">Make friends more fun by having them text OUTGOERS to <strong>(415) 523-1361</strong></p>
+</footer>
+
+</div>
+
+</body>
+</html>
